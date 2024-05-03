@@ -1,4 +1,4 @@
-name: CI/CD Pipelines with sonar cloud
+name: CI/CD Pipeline
 
 on:
   push:
@@ -24,28 +24,3 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run: docker push kushan2000/cicddemo2:latest
-
-  sonar_cloud_scan_github_actions:
-    name: "SonarCloud Scan GitHub Actions"
-    on:
-      workflow_dispatch:
-
-    jobs:
-      DemoSonarCloudSCan:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v2
-            with:
-              fetch-depth: 0
-
-          - name: SonarCloud Scan
-            uses: sonarsource/sonarcloud-github-action@master
-            env:
-              GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-              SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            with:
-              args: >
-                -Dsonar.organization=testsonar921
-                -Dsonar.projectKey=GitHub-actions2
-                -Dsonar.python.coverage.reportPaths=coverage.xml
