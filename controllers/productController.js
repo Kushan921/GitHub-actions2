@@ -1,7 +1,7 @@
 const Product = require('../models/Product');
 
 
-
+// test
 // Get all products
 exports.getAllProducts = async (req, res) => {
     try {
